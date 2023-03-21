@@ -22,7 +22,7 @@ mqtt_topic='airtag-mqtt/'
 ha_autodiscovery='1'
 csv_enabled='1'
 csv_path='debug.csv'
-delay='9'
+delayseconds='30'
 
 RED='\033[0;31m'
 NC='\033[0m' # No Color
@@ -163,6 +163,7 @@ do
     done
   shift
   msg=$@
+  delay=$delayseconds
   while [ $delay -gt 0 ]
   do
     printf "\r\033[KWaiting %.d second(s) before next update$msg" $((delay--))
