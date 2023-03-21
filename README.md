@@ -1,6 +1,9 @@
 # AirtagMQTT
 
-Based on the work of https://github.com/icepick3000/AirtagAlex/
+Based on the work of:
+https://github.com/icepick3000/AirtagAlex
+and 
+https://github.com/merlin077/AirtagMQTT
 
 AirtagMQTT fetches metadata from within the "Where is?" app on a Mac. This data is parsed and then published via MQTT.
 The location information can now be processed by software like Home Assistant which updates the location on the map and provides historical data visualization.
