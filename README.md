@@ -18,4 +18,5 @@ Configuration: open the file with a text editor and customize the configuration 
 - Traccar support
 - GUI column presentation
 - more configurations
+- update only on change
 - debug mode
