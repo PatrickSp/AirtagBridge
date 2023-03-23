@@ -1,18 +1,13 @@
 #!/bin/bash
 
 
-# AirtagMQTT reads various metadata from Apple Airtags using the "Where is?" app on a mac and publishes its values via MQTT.
+# AirtagBridge reads various metadata from Apple Airtags using the "Where is?" app on a mac and publishes its values via MQTT.
 
 # You need: Mosquitto MQTT Client (brew install mosquitto), 
 
-# Usage: airtag-mqtt -id '121212ED121212' -h <host> -p <port> -t '<topic>' -f <filename.csv>
-
 # Based on: https://github.com/icepick3000/AirtagAlex and https://github.com/merlin077/AirtagMQTT
 
-
-
 # Configuration
-
 
 mqtt_hostname='172.16.10.12'
 mqtt_port=''
@@ -30,13 +25,13 @@ NC='\033[0m' # No Color
 show_splashscreen () {
     
     echo""
-  printf "           Airtag${RED}MQTT${NC}Bridge\n"
-    echo "-----------------------------------------"
-    echo "         * v0.2 - 2023-03-23 *           "
-    echo "-----------------------------------------"
-    echo " Apple AirTag Metadata -> MQTT Bridge    "
-    echo " https://github.com/PatrickSp/AirtagMQTT " 
-    echo "                                         "
+  printf "           Airtag${RED}Bridge${NC}       \n"
+    echo "-------------------------------------------"
+    echo "           * v0.2 - 2023-03-23 *           "
+    echo "-------------------------------------------"
+    echo "      Apple AirTag Metadata Bridge         "
+    echo " https://github.com/PatrickSp/AirtagBridge " 
+    echo "                                           "
     }
     
 
@@ -44,8 +39,7 @@ show_splashscreen () {
 while :
 do 
 
-    show_splashscreen
-	echo "Copying Items.data file..." 
+    	echo "Copying Items.data file..." 
     cp -pr ~/Library/Caches/com.apple.findmy.fmipcore/Items.data Items.data 
     echo "Success"
 	echo "Check if CSV file exists..."
@@ -58,15 +52,6 @@ do
 	fi
     echo "Written header..."
     
-#    echo "Check if Airtagloki.csv exists"
-#	if [ ! -f Airtagloki.csv ]
-#	then
-#	echo "Nope, Airtagloki.csv does not exist, creating it!"
-	#Header for the CSV file (currently set up to append to the file)
-	#echo #datetime,name,serialnumber,producttype,productindentifier,vendoridentifier,antennapower,systemversion,batterystatus,locationposi#tiontype,locationlatitude,locationlongitude,locationtimestamp,locationverticalaccuracy,locationhorizontalaccuracy,locationfloorl#evel,locationaltitude,locationisinaccurate,locationisold,locationfinished,addresslabel,addressstreetaddress,addresscountrycode,a#ddressstatecode,addressadministrativearea,addressstreetname,addresslocality,addresscountry,addressareaofinteresta,addressareaofi#nterestb,batterystatus >> Airtagloki.csv
-	#fi
-    #echo "Written header..."
-
     sleep 3
         clear && printf '\e[3J'
     show_splashscreen
