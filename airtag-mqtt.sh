@@ -14,15 +14,15 @@
 # Configuration
 
 
-hostname='172.16.10.12'
+mqtt_hostname='172.16.10.12'
 mqtt_port=''
 mqtt_user='user'
 mqtt_pass='pass'
-mqtt_topic='airtag-mqtt/'
-ha_autodiscovery='1'
+mqtt_topic='AirTags/'
 csv_enabled='1'
 csv_path='debug.csv'
 delayseconds='30'
+debugmode='1'
 
 RED='\033[0;31m'
 NC='\033[0m' # No Color
@@ -31,15 +31,12 @@ show_splashscreen () {
     
     echo""
   printf "           Airtag${RED}MQTT${NC}Bridge\n"
-
-    echo "----------------------------------------"
-    echo "        * v0.1 - 2022-07-29 *           "
-    echo "----------------------------------------"
-    echo " apple airtag metadata -> MQTT bridge   "
-    echo "           github.com/merlin077         " 
-    echo "                                        "
-#    .---------- constant part!
-#    vvvv vvvv-- the code from above
+    echo "-----------------------------------------"
+    echo "         * v0.2 - 2023-03-23 *           "
+    echo "-----------------------------------------"
+    echo " Apple AirTag Metadata -> MQTT Bridge    "
+    echo " https://github.com/PatrickSp/AirtagMQTT " 
+    echo "                                         "
     }
     
 
@@ -121,42 +118,42 @@ do
 	echo $datetime,$name,$serialnumber,$producttype,$productindentifier,$vendoridentifier,$antennapower,$systemversion,$batterystatus,$locationpositiontype,$locationlatitude,$locationlongitude,$locationtimestamp,$locationverticalaccuracy,$locationhorizontalaccuracy,$locationfloorlevel,$locationaltitude,$locationisinaccurate,$locationisold,$locationfinished,$addresslabel,$addressstreetaddress,$addresscountrycode,$addressstatecode,$addressadministrativearea,$addressstreetname,$addresslocality,$addresscountry,$addressareaofinteresta,$addressareaofinterestb,$batterystatus >> $csv_path
     echo "Publishing via MQTT: ${mqtt_topic}${serialnumber}/..."  
     
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/datetime -m "${datetime}"
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/name -m "${name}"
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/serialnumber -m "${serialnumber}"
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/producttype -m "${producttype}"
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/productidentifier -m "${productidentifier}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/datetime -m "${datetime}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/name -m "${name}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/serialnumber -m "${serialnumber}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/producttype -m "${producttype}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/productidentifier -m "${productidentifier}"
     
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/vendoridentifier -m "${vendoridentifier}"
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/antennapower -m "${antennapower}"
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/systemversion -m "${systemversion}"
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/batterystatus -m "${batterystatus}"
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/locationpositiontype -m "${locationpositiontype}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/vendoridentifier -m "${vendoridentifier}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/antennapower -m "${antennapower}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/systemversion -m "${systemversion}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/batterystatus -m "${batterystatus}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/locationpositiontype -m "${locationpositiontype}"
     
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/locationlatitude -m "${locationlatitude}"
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/locationlongitude -m "${locationlongitude}"
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/locationtimestamp -m "${locationtimestamp}"
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/locationverticalaccuracy -m "${locationverticalaccuracy}"
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/locationhorizontalaccuracy -m "${locationhorizontalaccuracy}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/locationlatitude -m "${locationlatitude}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/locationlongitude -m "${locationlongitude}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/locationtimestamp -m "${locationtimestamp}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/locationverticalaccuracy -m "${locationverticalaccuracy}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/locationhorizontalaccuracy -m "${locationhorizontalaccuracy}"
     
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/locationfloorlevel -m "${locationfloorlevel}"
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/locationaltitude -m "${locationaltitude}"
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/locationisinaccurate -m "${locationisinaccurate}"
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/locationisold -m "${locationisold}"
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/locationfinished -m "${locationfinished}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/locationfloorlevel -m "${locationfloorlevel}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/locationaltitude -m "${locationaltitude}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/locationisinaccurate -m "${locationisinaccurate}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/locationisold -m "${locationisold}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/locationfinished -m "${locationfinished}"
     
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/addresslabel -m "${addresslabel}"
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/addressstreetaddress -m "${addressstreetaddress}"
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/addresscountrycode -m "${addresscountrycode}"
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/addressstatecode -m "${addressstatecode}"
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/addressadministrativearea -m "${addressadministrativearea}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/addresslabel -m "${addresslabel}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/addressstreetaddress -m "${addressstreetaddress}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/addresscountrycode -m "${addresscountrycode}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/addressstatecode -m "${addressstatecode}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/addressadministrativearea -m "${addressadministrativearea}"
     
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/addressstreetname -m "${addressstreetname}"
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/addresslocality -m "${addresslocality}"
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/addresscountry -m "${addresscountry}"
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/addressareaofinteresta -m "${addressareaofinteresta}"
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/addressareaofinterestb -m "${addressareaofinterestab}"
-    mosquitto_pub -h ${hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/batterystatus -m "${batterystatus}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/addressstreetname -m "${addressstreetname}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/addresslocality -m "${addresslocality}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/addresscountry -m "${addresscountry}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/addressareaofinteresta -m "${addressareaofinteresta}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/addressareaofinterestb -m "${addressareaofinterestab}"
+    mosquitto_pub -h ${mqtt_hostname} -u ${mqtt_user} -P ${mqtt_pass} -t ${mqtt_topic}${serialnumber}/batterystatus -m "${batterystatus}"
     echo "Success!"
     echo ""
 
