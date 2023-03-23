@@ -12,3 +12,10 @@ Requirements: mosquitto (Mac: 'brew install mosquitto')
 Usage: ./airtag-mqtt.sh
 
 Configuration: open the file with a text editor and customize the configuration variables on the top.
+
+# Roadmap:
+- Unix Timestamp
+- Traccar support
+- GUI column presentation
+- more configurations
+- debug mode
